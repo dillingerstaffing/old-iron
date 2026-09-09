@@ -78,9 +78,10 @@
       --mono: "IBM Plex Mono", monospace;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; background: var(--ink); }
+    html { scroll-behavior: smooth; background: var(--ink); -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
+      -webkit-tap-highlight-color: transparent;
       color: var(--paper);
       background:
         linear-gradient(rgba(232,229,218,.025) 1px, transparent 1px),
@@ -444,6 +445,7 @@
       background: var(--ink);
       border-color: var(--ink);
     }
+    .cta, .send, button.contact-option[data-copy] { min-height: 44px; }
     .contact-option[data-copy][data-copied="true"] {
       color: var(--paper);
       background: var(--ink);
