@@ -829,7 +829,7 @@
         'Count and details:',
         data.get('details').trim()
       ].join('\n');
-      status.textContent = 'Opening your email app with the inquiry filled in.';
+      status.textContent = 'Opening your email app with the inquiry filled in. Nothing opened? Copy the address from the contact options.';
       window.location.assign(`mailto:shipthisgroup@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
     });
   </script>
