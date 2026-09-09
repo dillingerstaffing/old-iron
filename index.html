@@ -611,8 +611,8 @@
         transition-delay: 0s !important;
       }
     }
-    /* The Proving Ground: the wipe bench, demonstrated. OLD IRON voice:
-       ink/paper, industrial orange, display serif headlines. */
+    /* The Proving Ground: one quiet line, honestly framed as a sketch. OLD IRON
+       voice: ink/paper, industrial orange, display serif headlines. */
     .pg-proof { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 24px; }
     .pg-proof h3 { font-family: var(--display); font-size: 26px; margin: 8px 0 10px; letter-spacing: -0.01em; }
     .pg-proof > p { color: var(--muted); font-size: 14.5px; max-width: 64ch; margin: 0 0 18px; }
@@ -627,7 +627,14 @@
     .pg-link span:last-child { color: var(--orange); }
     .pg-link:hover { border-color: var(--orange); transform: translateY(-2px); }
     .pg-link:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
-    .pg-note { font-family: var(--mono); font-size: 11.5px; color: var(--muted); margin: 14px 0 0; }
+    /* The Proving Ground: one quiet line, honestly framed as a sketch. */
+    .pg-quiet {
+      margin-top: 40px; border-top: 1px solid var(--line); padding-top: 22px;
+      font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+      max-width: 66ch; line-height: 1.7;
+    }
+    .pg-quiet a { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
+    .pg-quiet a:hover { color: var(--orange); }
     /* Motion system: custom easing curves and a timing scale as brand
        signature. No default easings anywhere on this page. */
     :root {
@@ -714,15 +721,11 @@
           </article>
         </div>
 
-        <div class="pg-proof">
-          <span class="section-index">SEE THE WIPE FIRST</span>
-          <h3>Try the sanitization bench.</h3>
-          <p>Run the same NIST 800-88 decision process the shop uses, drive by drive, with the certificate logic and the per-serial record. In your browser, before you hand anything over.</p>
-          <div class="pg-links">
-            <a class="pg-link" href="https://dillingerstaffing.github.io/proving-ground/#bench=wipe-station" target="_blank" rel="noopener"><span>THE WIPE STATION</span><span aria-hidden="true">↗</span></a>
-          </div>
-          <p class="pg-note">The link opens the exact bench, running, in a new tab.</p>
-        </div>
+        <p class="pg-quiet">
+          A simplified, interactive walkthrough of the NIST 800-88 wipe decision process:
+          <a href="https://dillingerstaffing.github.io/proving-ground/#bench=wipe-station" target="_blank" rel="noopener">The Wipe Station <span aria-hidden="true">↗</span></a>.
+          A teaching sketch, not the shop floor.
+        </p>
       </div>
     </section>
 
