@@ -332,9 +332,6 @@
       text-transform: uppercase;
     }
     .service p { margin: 0; color: var(--muted); font-size: 13px; }
-    .pg-line { margin: 26px 0 0; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
-    .pg-line a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
-    .pg-line a:hover { color: var(--paper); }
     .inventory-band {
       display: grid;
       grid-template-columns: repeat(4, minmax(0,1fr));
@@ -500,10 +497,15 @@
     input:focus, select:focus, textarea:focus { border-color: var(--ink); }
     textarea { min-height: 100px; resize: vertical; }
     select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 8px) 20px, calc(100% - 3px) 20px; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; }
-    .send {
+    .form-actions {
       grid-column: 1 / -1;
-      min-height: 60px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
       margin-top: 12px;
+    }
+    .send {
+      min-height: 60px;
       padding: 16px 20px;
       display: flex;
       align-items: center;
@@ -521,6 +523,26 @@
     }
     .send:hover, .send:focus-visible { background: transparent; color: var(--ink); }
     .send svg { width: 23px; height: 23px; }
+    .gmail-compose {
+      min-height: 60px;
+      padding: 14px 16px;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid rgba(17,18,15,.48);
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .055em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .gmail-compose:hover, .gmail-compose:focus-visible {
+      color: var(--paper);
+      background: var(--ink);
+      border-color: var(--ink);
+    }
     .form-status { grid-column: 1 / -1; min-height: 22px; margin: 0; font-size: 12px; font-weight: 500; }
     form > noscript { grid-column: 1 / -1; }
     .noscript-fallback {
@@ -598,7 +620,8 @@
       .step { grid-template-columns: 50px 1fr; gap: 14px; }
       .contact-grid { gap: 48px; }
       form { grid-template-columns: 1fr; }
-      .field, .field.full, .send, .form-status { grid-column: 1; }
+      .field, .field.full, .form-actions, .form-status { grid-column: 1; }
+      .form-actions { grid-template-columns: 1fr; }
       .footer .rail { align-items: flex-start; flex-direction: column; }
       .footer-meta { width: 100%; align-items: flex-start; flex-direction: column; gap: 14px; }
       .footer .contact-options { width: 100%; }
@@ -676,7 +699,6 @@
             <div><h3>Recycling</h3><p>Non-reusable material is routed to responsible recycling. Any fee is quoted up front.</p></div>
           </article>
         </div>
-        <p class="pg-line"><a href="https://dillingerstaffing.github.io/proving-ground/" target="_blank" rel="noopener">See Proving Ground for various simulations <span aria-hidden="true">↗</span></a></p>
       </div>
     </section>
 
@@ -773,9 +795,12 @@
               <label for="pickup-timing">When do you need it gone?</label>
               <input id="pickup-timing" name="pickup-timing" placeholder="Example: this month, flexible">
             </div>
-            <button class="send" type="submit">Compose inquiry
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8"/></svg>
-            </button>
+            <div class="form-actions">
+              <button class="send" type="submit">Compose inquiry
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8"/></svg>
+              </button>
+              <button class="gmail-compose" id="gmail-compose" type="button">Open in Gmail instead</button>
+            </div>
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
             <noscript>
               <p class="noscript-fallback">Email composition needs JavaScript. <a href="mailto:shipthisgroup@gmail.com">Email shipthisgroup@gmail.com directly.</a></p>
@@ -846,9 +871,8 @@
 
     const form = document.querySelector('#inquiry-form');
     const status = document.querySelector('#form-status');
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (!form.reportValidity()) return;
+    const gmailCompose = document.querySelector('#gmail-compose');
+    const buildInquiry = () => {
       const data = new FormData(form);
       const organization = data.get('organization').trim();
       const pickupTiming = data.get('pickup-timing').trim();
@@ -863,9 +887,23 @@
         data.get('details').trim()
       ];
       if (pickupTiming) bodyLines.push('', 'When you need it gone:', pickupTiming);
-      const body = bodyLines.join('\n');
+      return { subject, body: bodyLines.join('\n') };
+    };
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const { subject, body } = buildInquiry();
       status.textContent = 'Opening your email app with the inquiry filled in. Nothing opened? Copy the address from the contact options.';
       window.location.assign(`mailto:shipthisgroup@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    });
+
+    gmailCompose.addEventListener('click', () => {
+      if (!form.reportValidity()) return;
+      const { subject, body } = buildInquiry();
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=shipthisgroup@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      status.textContent = 'Opening Gmail with the inquiry filled in.';
+      window.open(gmailUrl, '_blank', 'noopener,noreferrer');
     });
   </script>
 </body>
