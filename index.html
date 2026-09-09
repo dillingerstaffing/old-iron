@@ -396,10 +396,41 @@
     }
     .contact h2 { max-width: 520px; }
     .contact-copy p { max-width: 450px; margin: 28px 0; font-size: 15px; }
-    .email-direct {
-      display: inline-block;
+    .contact-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 8px;
+    }
+    .contact-option {
+      min-height: 38px;
+      padding: 9px 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid rgba(17,18,15,.48);
+      border-radius: 0;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 10px;
       font-weight: 500;
-      text-underline-offset: 4px;
+      letter-spacing: .055em;
+      line-height: 1;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .contact-option:hover, .contact-option:focus-visible {
+      color: var(--paper);
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+    .contact-option[data-copy][data-copied="true"] {
+      color: var(--paper);
+      background: var(--ink);
+      border-color: var(--ink);
     }
     .contact-note { margin-top: 44px; font-size: 11px; line-height: 1.5; }
     form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -456,7 +487,21 @@
       letter-spacing: .06em;
       text-transform: uppercase;
     }
-    .footer .rail { display: flex; justify-content: space-between; gap: 18px; }
+    .footer .rail { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .footer-meta { display: flex; align-items: center; justify-content: flex-end; gap: 24px; }
+    .footer .contact-options { margin: 0; }
+    .footer .contact-option {
+      min-height: 32px;
+      padding: 7px 10px;
+      color: var(--paper);
+      border-color: var(--line);
+    }
+    .footer .contact-option:hover, .footer .contact-option:focus-visible,
+    .footer .contact-option[data-copy][data-copied="true"] {
+      color: var(--ink);
+      background: var(--orange);
+      border-color: var(--orange);
+    }
     @media (max-width: 980px) {
       .hero { grid-template-columns: 1fr; }
       .hero-copy { padding-right: 0; min-height: 690px; }
@@ -493,7 +538,10 @@
       .contact-grid { gap: 48px; }
       form { grid-template-columns: 1fr; }
       .field, .field.full, .send, .form-status { grid-column: 1; }
-      .footer .rail { flex-direction: column; }
+      .footer .rail { align-items: flex-start; flex-direction: column; }
+      .footer-meta { width: 100%; align-items: flex-start; flex-direction: column; gap: 14px; }
+      .footer .contact-options { width: 100%; }
+      .footer .contact-option { flex: 1 1 auto; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -605,7 +653,11 @@
             <span class="section-index" style="color:#11120f">04 / START A PICKUP</span>
             <h2>What is leaving your racks?</h2>
             <p>Give us the location, equipment type, and approximate count. We will reply with the next practical step.</p>
-            <a class="email-direct" href="mailto:shipthisgroup@gmail.com">shipthisgroup@gmail.com</a>
+            <div class="contact-options" aria-label="Email contact options">
+              <a class="contact-option" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shipthisgroup@gmail.com" target="_blank" rel="noopener noreferrer">Open in Gmail</a>
+              <button class="contact-option" type="button" data-copy="shipthisgroup@gmail.com">Copy address</button>
+              <a class="contact-option" href="mailto:shipthisgroup@gmail.com">Email app</a>
+            </div>
             <div class="contact-note">Recycling fees may apply to non-reusable material. Any fee is quoted before pickup.</div>
           </div>
           <form id="inquiry-form">
@@ -647,7 +699,17 @@
   </main>
 
   <footer class="footer">
-    <div class="rail"><span>OLD IRON / Hardware retirement</span><span>Companies and schools</span></div>
+    <div class="rail">
+      <span>OLD IRON / Hardware retirement</span>
+      <div class="footer-meta">
+        <span>Companies and schools</span>
+        <div class="contact-options" aria-label="Footer email contact options">
+          <a class="contact-option" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shipthisgroup@gmail.com" target="_blank" rel="noopener noreferrer">Open in Gmail</a>
+          <button class="contact-option" type="button" data-copy="shipthisgroup@gmail.com">Copy address</button>
+          <a class="contact-option" href="mailto:shipthisgroup@gmail.com">Email app</a>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script>
@@ -658,6 +720,41 @@
     };
     addEventListener('scroll', updateProgress, { passive: true });
     updateProgress();
+
+    const copyAddress = async (address) => {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(address);
+        return;
+      }
+      const field = document.createElement('textarea');
+      field.value = address;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+      const copied = document.execCommand('copy');
+      field.remove();
+      if (!copied) throw new Error('Copy failed');
+    };
+
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      const defaultLabel = button.textContent;
+      button.addEventListener('click', async () => {
+        try {
+          await copyAddress(button.dataset.copy);
+          button.textContent = 'Copied';
+          button.dataset.copied = 'true';
+          window.setTimeout(() => {
+            button.textContent = defaultLabel;
+            delete button.dataset.copied;
+          }, 1600);
+        } catch {
+          button.textContent = 'Copy failed';
+          window.setTimeout(() => { button.textContent = defaultLabel; }, 1600);
+        }
+      });
+    });
 
     const form = document.querySelector('#inquiry-form');
     const status = document.querySelector('#form-status');
@@ -677,7 +774,7 @@
         data.get('details').trim()
       ].join('\n');
       status.textContent = 'Opening your email app with the inquiry filled in.';
-      window.location.href = `mailto:shipthisgroup@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.assign(`mailto:shipthisgroup@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
     });
   </script>
 </body>
