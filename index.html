@@ -519,6 +519,15 @@
     .send:hover, .send:focus-visible { background: transparent; color: var(--ink); }
     .send svg { width: 23px; height: 23px; }
     .form-status { grid-column: 1 / -1; min-height: 22px; margin: 0; font-size: 12px; font-weight: 500; }
+    form > noscript { grid-column: 1 / -1; }
+    .noscript-fallback {
+      margin: 0;
+      padding-top: 14px;
+      border-top: 1px solid rgba(17,18,15,.4);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .noscript-fallback a { text-underline-offset: 3px; }
     .footer {
       padding: 28px 0;
       color: var(--muted);
@@ -760,6 +769,9 @@
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8"/></svg>
             </button>
             <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            <noscript>
+              <p class="noscript-fallback">Email composition needs JavaScript. <a href="mailto:shipthisgroup@gmail.com">Email shipthisgroup@gmail.com directly.</a></p>
+            </noscript>
           </form>
         </div>
       </div>
