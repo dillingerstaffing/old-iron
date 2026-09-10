@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="build-version" content="v20260910-oldiron">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="max-image-preview:large">
   <meta name="color-scheme" content="dark">
@@ -979,6 +980,36 @@
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=shipthisgroup@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       status.textContent = 'Opening Gmail with the inquiry filled in.';
       window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+    });
+  </script>
+  <script>
+    const currentBuildVersion = document.querySelector('meta[name="build-version"]')?.content;
+    let buildVersionCheckInFlight = false;
+    let buildReloadRequested = false;
+
+    document.addEventListener('visibilitychange', async () => {
+      if (document.visibilityState !== 'visible' || buildVersionCheckInFlight || buildReloadRequested) return;
+      buildVersionCheckInFlight = true;
+
+      try {
+        const response = await fetch('', { cache: 'no-store' });
+        if (!response.ok) return;
+
+        const html = await response.text();
+        const fetchedDocument = new DOMParser().parseFromString(html, 'text/html');
+        const fetchedBuildVersion = fetchedDocument.querySelector('meta[name="build-version"]')?.content;
+
+        const lastReloadedBuildVersion = history.state?.oldIronReloadedBuildVersion;
+        if (fetchedBuildVersion && fetchedBuildVersion !== currentBuildVersion && fetchedBuildVersion !== lastReloadedBuildVersion) {
+          buildReloadRequested = true;
+          history.replaceState({ ...history.state, oldIronReloadedBuildVersion: fetchedBuildVersion }, '');
+          window.location.reload();
+        }
+      } catch {
+        // A failed background check should not interrupt the page.
+      } finally {
+        buildVersionCheckInFlight = false;
+      }
     });
   </script>
   <script>
