@@ -601,6 +601,17 @@
     .footer .rail { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
     .footer-meta { display: flex; align-items: center; justify-content: flex-end; gap: 24px; }
     .footer .contact-options { margin: 0; }
+    .footer .elsewhere { color: var(--muted); white-space: nowrap; }
+    .footer .elsewhere a {
+      color: inherit;
+      text-decoration-color: rgba(170,169,159,.5);
+      text-underline-offset: 3px;
+      transition: color .2s ease, text-decoration-color .2s ease;
+    }
+    .footer .elsewhere a:hover, .footer .elsewhere a:focus-visible {
+      color: var(--paper);
+      text-decoration-color: currentColor;
+    }
     .footer .contact-option {
       min-height: 32px;
       padding: 7px 10px;
@@ -866,6 +877,7 @@
           <a class="contact-option" href="mailto:shipthisgroup@gmail.com">Email app</a>
           <span class="contact-status" role="status" aria-live="polite"></span>
         </div>
+        <span class="elsewhere">Elsewhere: <a href="https://dillingerstaffing.github.io/proving-ground/" target="_blank" rel="noopener noreferrer">Proving Ground <span aria-hidden="true">↗</span></a></span>
       </div>
     </div>
   </footer>
