@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="build-version" content="v20260911-oldiron-0355">
+  <meta name="build-version" content="v20260911-oldiron-0455">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="max-image-preview:large">
   <meta name="color-scheme" content="dark">
@@ -846,15 +846,15 @@
           <form id="inquiry-form">
             <div class="field">
               <label for="organization">Organization</label>
-              <input id="organization" name="organization" autocomplete="organization" placeholder="Company or school" required>
+              <input id="organization" name="organization" autocomplete="organization" enterkeyhint="next" placeholder="Company or school" required>
             </div>
             <div class="field">
               <label for="email">Work email</label>
-              <input id="email" name="email" type="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="name@organization.org" required>
+              <input id="email" name="email" type="email" autocomplete="email" enterkeyhint="next" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="name@organization.org" required>
             </div>
             <div class="field">
               <label for="location">Pickup location</label>
-              <input id="location" name="location" autocomplete="address-level2" placeholder="City, state" required>
+              <input id="location" name="location" autocomplete="address-level2" enterkeyhint="next" placeholder="City, state" required>
             </div>
             <div class="field">
               <label for="hardware">Primary hardware</label>
@@ -873,7 +873,7 @@
             </div>
             <div class="field full">
               <label for="pickup-timing">When do you need it gone?</label>
-              <input id="pickup-timing" name="pickup-timing" placeholder="Example: this month, flexible">
+              <input id="pickup-timing" name="pickup-timing" enterkeyhint="send" placeholder="Example: this month, flexible">
             </div>
             <div class="form-actions">
               <button class="send" type="submit">Compose inquiry
