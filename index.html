@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="build-version" content="v20260912-oldiron-2125">
+  <meta name="build-version" content="v20260913-oldiron-0420">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="max-image-preview:large">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#11120f">
-  <meta name="description" content="OLD IRON handles retired servers, GPUs, workstations, and laptops for companies and schools, from pickup through data wiping and disposition.">
+  <meta name="description" content="Free pickup of retired servers, GPUs, workstations, and laptops for companies and schools, with NIST 800-88 data wiping, per-serial certificates, insured logistics, and recycling fees quoted up front.">
   <link rel="canonical" href="https://dillingerstaffing.github.io/old-iron/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="OLD IRON">
-  <meta property="og:title" content="OLD IRON | Server and Hardware Retirement, Pickup to Wipe">
-  <meta property="og:description" content="OLD IRON handles retired servers, GPUs, workstations, and laptops for companies and schools, from pickup through data wiping and disposition.">
+  <meta property="og:title" content="OLD IRON | Free Pickup, Certified Data Wiping, Hardware Retirement">
+  <meta property="og:description" content="Free pickup of retired servers, GPUs, workstations, and laptops for companies and schools, with NIST 800-88 data wiping, per-serial certificates, insured logistics, and recycling fees quoted up front.">
   <meta property="og:url" content="https://dillingerstaffing.github.io/old-iron/">
   <meta property="og:image" content="https://dillingerstaffing.github.io/old-iron/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Roboto+Condensed:wght@500;600;700&amp;display=swap" rel="stylesheet">
-  <title>OLD IRON | Server and Hardware Retirement, Pickup to Wipe</title>
+  <title>OLD IRON | Free Pickup, Certified Data Wiping, Hardware Retirement</title>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -708,7 +708,47 @@
         animation-duration: .01ms !important;
       }
     }
+    .record-head { margin-bottom: 20px; }
+    .record-head h2 { margin-top: 14px; }
+    .record-deck { margin: 0 0 52px; color: var(--muted); font-size: 15px; max-width: 620px; }
+    .record-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(28px, 4vw, 72px); align-items: start; }
+    .cert-doc { background: var(--paper); color: var(--ink); padding: clamp(26px, 3.4vw, 40px); position: relative; }
+    .cert-doc::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(17,18,15,.28); pointer-events: none; }
+    .cert-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 18px; margin-bottom: 6px; border-bottom: 2px solid var(--ink); }
+    .cert-head b { font-family: var(--display); font-size: 22px; letter-spacing: -.02em; text-transform: uppercase; }
+    .cert-head span { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; opacity: .65; }
+    .cert-row { display: grid; grid-template-columns: 140px 1fr; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(17,18,15,.18); font-size: 14px; }
+    .cert-row dt { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .6; padding-top: 3px; }
+    .cert-row dd { margin: 0; }
+    .cert-sample { margin: 18px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; opacity: .55; }
+    .cost-rows { border-top: 1px solid var(--line); }
+    .cost-row { padding: 26px 0; border-bottom: 1px solid var(--line); }
+    .cost-row > span { display: inline-block; margin-bottom: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); }
+    .cost-row h3 { margin: 0 0 10px; font-family: var(--display); font-size: 24px; text-transform: uppercase; letter-spacing: -.01em; }
+    .cost-row p { margin: 0; color: var(--muted); font-size: 14px; max-width: 46ch; }
+    @media (max-width: 980px) { .record-grid { grid-template-columns: 1fr; } }
   </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Hardware retirement, pickup to wipe",
+      "provider": {
+        "@type": "Organization",
+        "name": "OLD IRON",
+        "url": "https://dillingerstaffing.github.io/old-iron/",
+        "email": "shipthisgroup@gmail.com"
+      },
+      "serviceType": ["IT asset disposition", "Server recycling pickup", "NIST 800-88 data wiping", "Electronics recycling"],
+      "audience": { "@type": "BusinessAudience", "audienceType": "Companies and schools" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free pickup of reusable equipment. Recycling fees, if any, are quoted up front before pickup."
+      }
+    }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -887,6 +927,45 @@
               <p class="noscript-fallback">Email composition needs JavaScript. <a href="mailto:shipthisgroup@gmail.com?subject=Pickup%20request">Email shipthisgroup@gmail.com directly.</a></p>
             </noscript>
           </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="record" aria-labelledby="record-heading">
+      <div class="rail">
+        <div class="section-head record-head">
+          <span class="section-index" id="record-heading">05 / THE RECORD</span>
+          <h2>What you leave with.</h2>
+        </div>
+        <p class="record-deck">Every processed serial gets a certificate listing the NIST 800-88 method used. Costs are stated before pickup, never after.</p>
+        <div class="record-grid">
+          <article class="cert-doc" aria-label="Sample wipe certificate, details redacted">
+            <div class="cert-head"><b>OLD IRON</b><span>Data wipe certificate</span></div>
+            <dl>
+              <div class="cert-row"><dt>Organization</dt><dd>[redacted in sample]</dd></div>
+              <div class="cert-row"><dt>Device</dt><dd>Hard disk drive</dd></div>
+              <div class="cert-row"><dt>Serial</dt><dd>[redacted in sample]</dd></div>
+              <div class="cert-row"><dt>Method</dt><dd>NIST 800-88 Rev. 1 Clear</dd></div>
+              <div class="cert-row"><dt>Verification</dt><dd>Read-back verified</dd></div>
+              <div class="cert-row"><dt>Certificate</dt><dd>OI-SAMPLE</dd></div>
+            </dl>
+            <p class="cert-sample">Redacted sample. Real certificates carry your lot's actual serials and methods.</p>
+          </article>
+          <div class="cost-rows">
+            <div class="cost-row">
+              <span>Free</span>
+              <h3>Pickup of reusable equipment</h3>
+              <p>Insured logistics and a wipe certificate for every processed serial, included.</p>
+            </div>
+            <div class="cost-row">
+              <span>Quoted up front</span>
+              <h3>Recycling fee for non-reusable material</h3>
+              <p>Only if some of your equipment cannot be reused. Stated before pickup, never added after.</p>
+            </div>
+            <a class="quiet-cta" href="#contact">Offer hardware
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8"/></svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
