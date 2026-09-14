@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="build-version" content="v20260913-oldiron-2212">
+  <meta name="build-version" content="v20260913-oldiron-2225">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="max-image-preview:large">
   <meta name="color-scheme" content="light dark">
@@ -1055,7 +1055,9 @@
         `Primary hardware: ${data.get('hardware')}`,
         '',
         'Count and details:',
-        data.get('details').trim()
+        data.get('details').trim(),
+        '',
+        'Equipment photos: attach to this email if you have them'
       ];
       if (pickupTiming) bodyLines.push('', 'When you need it gone:', pickupTiming);
       return { subject, body: bodyLines.join('\n') };
