@@ -1,5 +1,5 @@
 // VERSION: bump this string on every deploy that changes cached assets, so clients install a fresh service worker.
-const VERSION = 'v20260914-0406';
+const VERSION = 'v20260914-0406-llms';
 const CACHE = 'old-iron-' + VERSION;
 const OFFLINE_URL = 'index.html';
 
