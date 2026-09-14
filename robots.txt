@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://dillingerstaffing.github.io/old-iron/sitemap.xml
+
+# LLM and AI-assistant instructions: https://dillingerstaffing.github.io/old-iron/llms.txt
