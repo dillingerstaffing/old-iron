@@ -1,5 +1,5 @@
 // VERSION: bump this string on every deploy that changes cached assets, so clients install a fresh service worker.
-const VERSION = 'v20260914-oldiron-phone';
+const VERSION = 'v20260914-oldiron-2325';
 const CACHE = 'old-iron-' + VERSION;
 const OFFLINE_URL = 'index.html';
 
