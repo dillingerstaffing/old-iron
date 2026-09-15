@@ -146,7 +146,7 @@
     .topline {
       height: 4px;
       position: fixed;
-      inset: 0 0 auto;
+      top: env(safe-area-inset-top); left: 0; right: 0;
       z-index: 50;
       background: var(--orange);
       transform-origin: left;
@@ -162,6 +162,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 24px;
+      padding-top: env(safe-area-inset-top);
       border-bottom: 1px solid var(--line);
       color: var(--muted);
       font-size: 12px;
@@ -618,7 +619,7 @@
     }
     .noscript-fallback a { text-underline-offset: 3px; }
     .footer {
-      padding: 28px 0;
+      padding: 28px 0 calc(28px + env(safe-area-inset-bottom));
       color: var(--muted);
       background: var(--ink);
       font-size: 10px;
