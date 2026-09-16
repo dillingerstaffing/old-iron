@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="build-version" content="v20260916-oldiron-1608">
+  <meta name="build-version" content="v20260916-oldiron-theme">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="robots" content="max-image-preview:large">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#11120f">
+  <meta name="theme-color" content="#ece6d5">
   <meta name="description" content="Free pickup of retired servers, GPUs, workstations, and laptops for companies and schools. NIST 800-88 wiping, certified per serial. Fees quoted up front.">
   <link rel="canonical" href="https://dillingerstaffing.github.io/old-iron/">
   <meta property="og:type" content="website">
@@ -32,8 +32,21 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Roboto+Condensed:wght@500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Roboto+Condensed:wght@500;600;700&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
   <title>OLD IRON | Free Pickup, Certified Data Wiping</title>
+  <script>
+    (() => {
+      // Theme: notebook is the default, a stored visitor choice wins. Runs
+      // before the stylesheet is parsed so the first paint is already the
+      // right theme, with no flash of the wrong one.
+      try {
+        const t = localStorage.getItem('emi-site-theme');
+        document.documentElement.dataset.theme = t === 'classic' ? 'classic' : 'notebook';
+      } catch (_) {
+        document.documentElement.dataset.theme = 'notebook';
+      }
+    })();
+  </script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -169,7 +182,7 @@
       letter-spacing: .04em;
     }
     .utility strong { color: var(--paper); font-weight: 500; }
-    .utility nav { display: flex; gap: 24px; }
+    .utility nav { display: flex; gap: 24px; align-items: center; }
     .utility nav a { text-decoration: none; transition: color .2s ease; display: inline-flex; align-items: center; min-height: 44px; }
     .utility nav a:hover, .utility nav a:focus-visible { color: var(--orange); }
     .hero {
@@ -664,6 +677,150 @@
       outline-offset: 3px;
       box-shadow: 0 0 0 6px var(--ink);
     }
+    /* ---- The theme toggle: a quiet folio mark, not a nav link ---- */
+    .theme-toggle {
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background-color .45s ease, color .45s ease, border-color .45s ease;
+    }
+    .theme-toggle:hover { border-color: var(--orange); }
+    .theme-toggle:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+    .theme-toggle-mark { display: flex; width: 12px; height: 12px; transition: transform .5s cubic-bezier(.3, .7, .2, 1); }
+    .theme-toggle-mark i { display: block; width: 6px; height: 12px; }
+    .theme-toggle-mark i:first-child { background: #ece6d5; }
+    .theme-toggle-mark i:last-child { background: #241f17; border-left: 1px solid #ece6d5; }
+    .theme-toggle.is-flipped .theme-toggle-mark { transform: rotate(180deg); }
+
+    /* ================= Theme system: notebook (default) and classic =================
+       Classic is the dark industrial design carried by the tokens above. The
+       notebook block below re-voices the same markup as a folio: flat warm
+       paper, committed ink, one sanguine accent reserved for affordances and
+       annotations, hairline rules, serif article type. No glow, no gradients,
+       no texture, no notebook cliches. */
+    [data-theme="notebook"] {
+      --ink: #ece6d5;
+      --ink-2: #d9cfae;
+      --paper: #241f17;
+      --muted: #5e5648;
+      --line: #c9bfa4;
+      --orange: #8c3f22;
+      --orange-dark: #c98a5a;
+      --green: #8c3f22;
+    }
+    html[data-theme="notebook"] { background: #ece6d5; color-scheme: light; }
+    html[data-theme="classic"] { color-scheme: dark; }
+    [data-theme="notebook"] body {
+      font-family: "Newsreader", Georgia, serif;
+      background:
+        linear-gradient(rgba(36,31,23,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,31,23,.05) 1px, transparent 1px),
+        var(--ink);
+    }
+    [data-theme="notebook"] ::selection { background: var(--orange); color: #fdfaf1; }
+    [data-theme="notebook"] ::-webkit-scrollbar { width: 10px; height: 10px; }
+    [data-theme="notebook"] ::-webkit-scrollbar-track { background: #e3dac2; }
+    [data-theme="notebook"] ::-webkit-scrollbar-thumb { background: #a89a76; border: 2px solid #e3dac2; }
+    [data-theme="notebook"] { scrollbar-color: #a89a76 #e3dac2; }
+
+    /* Tonal timing on theme switches. Elements that own their transitions
+       keep them; this only cross-fades surface colors. */
+    body, .utility, .cta, .quiet-cta, .service, .inventory-band, .inventory-item,
+    .contact, .footer, .contact-option, .send, .gmail-compose, .topline,
+    .skip-link, .cert-doc, .hero-visual, .theme-toggle, .step, .faq-entry,
+    .section-index, input, select, textarea {
+      transition: background-color .45s ease, color .45s ease, border-color .45s ease;
+    }
+
+    /* Type: headings keep the condensed industrial voice; article text is serif. */
+    [data-theme="notebook"] .hero-deck { color: #3e382d; }
+    [data-theme="notebook"] .faq-entry p { color: #3e382d; }
+    [data-theme="notebook"] .utility nav a:focus-visible,
+    [data-theme="notebook"] .quiet-cta:focus-visible { outline-color: var(--orange); }
+
+    /* Hero: paper ground, ink overlay tints, sanguine intake tag. */
+    [data-theme="notebook"] .hero-visual { background: #d9cfae; }
+    [data-theme="notebook"] .hero-visual::after {
+      background:
+        linear-gradient(90deg, rgba(36,31,23,.30), transparent 36%),
+        linear-gradient(0deg, rgba(36,31,23,.45), transparent 34%);
+    }
+    [data-theme="notebook"] .asset-tag { color: #fdfaf1; }
+    [data-theme="notebook"] .visual-caption { color: rgba(36,31,23,.8); }
+
+    /* Service cards: flat paper panels, hairline frames, ink hover. */
+    [data-theme="notebook"] .service { background: #e7ddc4; }
+    [data-theme="notebook"] .service:hover { background: var(--ink-2); }
+    /* Ink encodes commitment: the four service icons are the committed record
+       of the work, drawn in heavy near-black ink. Sanguine stays reserved for
+       annotations and affordances (indices, step numbers, CTAs). */
+    [data-theme="notebook"] .service svg { color: var(--paper); }
+    [data-theme="notebook"] .service svg path { stroke-width: 2; }
+
+    /* Inventory band becomes an ink plate: evidence keyed in paper ink. */
+    [data-theme="notebook"] .inventory-item { border-right-color: rgba(244,239,224,.22); }
+    [data-theme="notebook"] .inventory-item em { color: rgba(244,239,224,.08); }
+    [data-theme="notebook"] .inventory-item b { color: #f4efe0; }
+    [data-theme="notebook"] .inventory-item span { color: var(--orange-dark); }
+
+    /* The record: the certificate is an ink document on the paper page. */
+    [data-theme="notebook"] .cert-doc { box-shadow: 0 14px 34px rgba(36,31,23,.22); }
+    [data-theme="notebook"] .cert-doc::before { border-color: rgba(244,239,224,.28); }
+    [data-theme="notebook"] .cert-row { border-bottom-color: rgba(244,239,224,.2); }
+    [data-theme="notebook"] .cert-sample { color: #a89a76; }
+
+    /* Contact band: sanguine plate, paper ink, hairline controls. */
+    [data-theme="notebook"] .contact { background: var(--orange); color: #f4efe0; }
+    [data-theme="notebook"] .contact .section-index { color: #f4efe0; }
+    [data-theme="notebook"] .contact-copy p { color: rgba(244,239,224,.85); }
+    [data-theme="notebook"] .contact-note { color: rgba(244,239,224,.72); }
+    [data-theme="notebook"] .contact-option { border-color: rgba(244,239,224,.45); }
+    [data-theme="notebook"] input, [data-theme="notebook"] select,
+    [data-theme="notebook"] textarea { border-bottom-color: rgba(244,239,224,.5); }
+    [data-theme="notebook"] input::placeholder,
+    [data-theme="notebook"] textarea::placeholder { color: rgba(244,239,224,.6); }
+    [data-theme="notebook"] .noscript-fallback { border-top-color: rgba(244,239,224,.4); }
+    [data-theme="notebook"] .form-status { color: rgba(244,239,224,.85); }
+
+    /* Footer: paper ground, ink text, sanguine hover affordances. */
+    [data-theme="notebook"] .footer .elsewhere a { text-decoration-color: rgba(94,86,72,.5); }
+
+    /* Focus rings: sanguine on paper, no dark halo needed. */
+    [data-theme="notebook"] a:focus-visible,
+    [data-theme="notebook"] button:focus-visible,
+    [data-theme="notebook"] input:focus-visible,
+    [data-theme="notebook"] select:focus-visible,
+    [data-theme="notebook"] textarea:focus-visible {
+      outline: 3px solid var(--orange);
+      outline-offset: 3px;
+      box-shadow: none;
+    }
+    [data-theme="notebook"] .theme-toggle:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+    [data-theme="notebook"] .skip-link {
+      color: #fdfaf1;
+      box-shadow: 0 0 0 6px var(--paper);
+    }
+
+    /* ---- Theme wipe: a calm radial reveal from the toggle ---- */
+    ::view-transition-old(root), ::view-transition-new(root) {
+      animation: none; mix-blend-mode: normal;
+    }
+    ::view-transition-new(root) {
+      z-index: 2147483647;
+      clip-path: circle(0px at var(--tx, 50vw) var(--ty, 12px));
+      animation: theme-wipe .7s cubic-bezier(.32, .72, .24, 1) forwards;
+    }
+    @keyframes theme-wipe {
+      to { clip-path: circle(150vmax at var(--tx, 50vw) var(--ty, 12px)); }
+    }
+
     @media (max-width: 980px) {
       .hero { grid-template-columns: 1fr; }
       .hero-copy { padding-right: 0; min-height: 690px; }
@@ -706,12 +863,15 @@
       .footer .contact-options { width: 100%; }
       .footer .contact-option { flex: 1 1 auto; }
     }
+    .contact .section-index { color: #11120f; }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       * {
         transition-duration: .01ms !important;
         animation-duration: .01ms !important;
       }
+      ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+      .theme-toggle-mark { transition: none; }
     }
     .record-head { margin-bottom: 20px; }
     .record-head h2 { margin-top: 14px; }
@@ -765,6 +925,9 @@
         <a href="#services">Services</a>
         <a href="#process">Process</a>
         <a href="#contact">Offer hardware</a>
+        <button class="theme-toggle" type="button" aria-label="Switch to classic iron theme" title="Switch theme">
+          <span class="theme-toggle-mark" aria-hidden="true"><i></i><i></i></span>
+        </button>
       </nav>
     </div>
     <section class="hero" aria-labelledby="hero-title">
@@ -917,7 +1080,7 @@
       <div class="rail">
         <div class="contact-grid">
           <div class="contact-copy">
-            <span class="section-index" style="color:#11120f">05 / START A PICKUP</span>
+            <span class="section-index">05 / START A PICKUP</span>
             <h2>Tell us what is leaving your racks.</h2>
             <p>No inventory list needed: send a few phone photos of the pile, or just give us the location, equipment type, and approximate count. We reply to every pickup request within 24 hours with the next practical step.</p>
             <div class="contact-options" role="group" aria-label="Contact options">
@@ -1086,6 +1249,48 @@
       status.textContent = 'Opening Gmail with the inquiry filled in.';
       window.open(gmailUrl, '_blank', 'noopener,noreferrer');
     });
+  </script>
+  <script>
+    (() => {
+      // Theme engine: notebook is the default, a stored choice wins (the head
+      // script already set data-theme before first paint). The toggle flips
+      // live; with the view-transition API the new theme wipes in radially
+      // from the toggle, otherwise the tonal CSS transitions carry it.
+      // prefers-reduced-motion falls back to an instant swap.
+      const KEY = 'emi-site-theme';
+      const root = document.documentElement;
+      const meta = document.querySelector('meta[name="theme-color"]');
+      const COLORS = { notebook: '#ece6d5', classic: '#11120f' };
+      const btn = document.querySelector('.theme-toggle');
+      const current = () => (root.dataset.theme === 'classic' ? 'classic' : 'notebook');
+      const otherName = (t) => (t === 'classic' ? 'notebook folio' : 'classic iron');
+      function apply(t) {
+        root.dataset.theme = t;
+        if (meta) meta.setAttribute('content', COLORS[t]);
+        if (btn) btn.setAttribute('aria-label', 'Switch to ' + otherName(t) + ' theme');
+      }
+      function toggle() {
+        const next = current() === 'classic' ? 'notebook' : 'classic';
+        try { localStorage.setItem(KEY, next); } catch (_) {}
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (btn) {
+          const r = btn.getBoundingClientRect();
+          root.style.setProperty('--tx', Math.round(r.left + r.width / 2) + 'px');
+          root.style.setProperty('--ty', Math.round(r.top + r.height / 2) + 'px');
+          btn.classList.toggle('is-flipped', next === 'classic');
+        }
+        if (!reduced && document.startViewTransition) {
+          document.startViewTransition(() => apply(next));
+        } else {
+          apply(next);
+        }
+      }
+      if (btn) {
+        btn.classList.toggle('is-flipped', current() === 'classic');
+        btn.addEventListener('click', toggle);
+      }
+      apply(current());
+    })();
   </script>
   <script>
     const currentBuildVersion = document.querySelector('meta[name="build-version"]')?.content;
