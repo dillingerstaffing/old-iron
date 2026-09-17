@@ -1,5 +1,5 @@
 // VERSION: bump this string on every deploy that changes cached assets, so clients install a fresh service worker.
-const VERSION = 'v20260916-oldiron-icons';
+const VERSION = 'v20260916-oldiron-ogtype';
 const CACHE = 'old-iron-' + VERSION;
 const OFFLINE_URL = 'index.html';
 
