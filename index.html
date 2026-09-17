@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="build-version" content="v20260916-oldiron-ogtype">
+  <meta name="build-version" content="v20260916-oldiron-2208">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="robots" content="max-image-preview:large">
   <meta name="color-scheme" content="light dark">
@@ -99,6 +99,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes. Working gear is refurbished for reuse. Dead equipment is recycled responsibly. Non-reusable material carries a recycling fee, quoted up front before pickup."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we mail in devices from departing employees for certified wipes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Mail or drop off the drives or laptops from departing staff; we wipe each to NIST 800-88, issue a per-serial certificate for every drive, and send a monthly batch report for your records. Flat per-asset fee, quoted before you ship."
           }
         }
       ]
@@ -506,6 +514,7 @@
       gap: 7px;
       margin-top: 8px;
     }
+    .contact-options--inline { display: inline-flex; gap: 8px 10px; margin: 0; }
     .contact-option {
       min-height: 44px;
       padding: 9px 12px;
@@ -1031,6 +1040,10 @@
         <article class="faq-entry">
           <h3>Do you take equipment that no longer works?</h3>
           <p>Yes. Working gear is refurbished for reuse. Dead equipment is recycled responsibly. Non-reusable material carries a recycling fee, quoted up front before pickup.</p>
+        </article>
+        <article class="faq-entry">
+          <h3>Can we mail in devices from departing employees for certified wipes?</h3>
+          <p>Yes. Mail or drop off the drives or laptops from departing staff; we wipe each to NIST 800-88, issue a per-serial certificate for every drive, and send a monthly batch report for your records. Flat per-asset fee, quoted before you ship. Ask about mail-in wipe: <span class="contact-options contact-options--inline" role="group" aria-label="Mail-in wipe contact options"><a class="contact-option" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shipthisgroup@gmail.com&amp;su=Mail-in%20wipe%20quote&amp;body=Device%20count%20and%20type%3A%0AWhere%20are%20you%20shipping%20from%3A%0AAnything%20else%20we%20should%20know%3A" target="_blank" rel="noopener noreferrer">Open in Gmail</a><button class="contact-option" type="button" data-copy="shipthisgroup@gmail.com">Copy address</button><a class="contact-option" href="mailto:shipthisgroup@gmail.com?subject=Mail-in%20wipe%20quote&amp;body=Device%20count%20and%20type%3A%0AWhere%20are%20you%20shipping%20from%3A%0AAnything%20else%20we%20should%20know%3A">Email app</a><span class="contact-status" role="status" aria-live="polite"></span></span></p>
         </article>
         <a class="quiet-cta" href="#contact">Offer hardware
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8"/></svg>
