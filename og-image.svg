@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ece6d5"/>
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#a59b87" stroke-width="2"/>
+  <text x="72" y="100" font-family="'Courier New', monospace" font-size="26" letter-spacing="7" fill="#5d574c">HARDWARE SERVICE</text>
+  <text x="68" y="235" font-family="Georgia, 'Times New Roman', serif" font-size="100" fill="#241f17">Old Iron</text>
+  <rect x="72" y="272" width="300" height="6" fill="#8c3f22"/>
+<text x="72" y="340" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#241f17">Certified data wiping. Free pickup.</text>
+  <text x="72" y="562" font-family="'Courier New', monospace" font-size="24" letter-spacing="2" fill="#5d574c">dillingerstaffing.github.io/old-iron</text>
+  <g transform="translate(900,185) scale(0.5078)"><rect x="116" y="90" width="280" height="16" fill="#8c3f22"/><rect x="116" y="106" width="280" height="48" fill="#241f17"/><rect x="220" y="154" width="72" height="204" fill="#241f17"/><rect x="116" y="358" width="280" height="64" fill="#241f17"/></g>
+</svg>
