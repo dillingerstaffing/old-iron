@@ -579,6 +579,8 @@
       letter-spacing: .08em;
       text-transform: uppercase;
     }
+    .req { color: var(--orange); font-weight: 700; }
+    .req-note { grid-column: 1 / -1; margin: 0; font-size: 11px; opacity: .75; }
     input, select, textarea {
       width: 100%;
       border: 0;
@@ -877,7 +879,7 @@
       .step { grid-template-columns: 50px 1fr; gap: 14px; }
       .contact-grid { gap: 48px; }
       form { grid-template-columns: 1fr; }
-      .field, .field.full, .form-actions, .form-status { grid-column: 1; }
+      .field, .field.full, .form-actions, .form-status, .req-note { grid-column: 1; }
       .form-actions { grid-template-columns: 1fr; }
       .footer .rail { align-items: flex-start; flex-direction: column; }
       .footer-meta { width: 100%; align-items: flex-start; flex-direction: column; gap: 14px; }
@@ -1134,20 +1136,21 @@
             <div class="contact-note cross-sell">Replacing what you retire? TAPEOUT sells <a href="https://dillingerstaffing.github.io/tapeout/" target="_blank" rel="noopener noreferrer">burn-in-tested GPUs and compute parts</a>.</div>
           </div>
           <form id="inquiry-form">
+            <p class="req-note">Fields marked <span class="req" aria-hidden="true">*</span> are required.</p>
             <div class="field">
-              <label for="organization">Organization</label>
+              <label for="organization">Organization <span class="req" aria-hidden="true">*</span></label>
               <input id="organization" name="organization" autocomplete="organization" enterkeyhint="next" placeholder="Company or school" required maxlength="100">
             </div>
             <div class="field">
-              <label for="email">Work email</label>
+              <label for="email">Work email <span class="req" aria-hidden="true">*</span></label>
               <input id="email" name="email" type="email" autocomplete="email" enterkeyhint="next" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="name@organization.org" required maxlength="254">
             </div>
             <div class="field">
-              <label for="location">Pickup location</label>
+              <label for="location">Pickup location <span class="req" aria-hidden="true">*</span></label>
               <input id="location" name="location" autocomplete="address-level2" enterkeyhint="next" placeholder="City, state" required maxlength="100">
             </div>
             <div class="field">
-              <label for="hardware">Primary hardware</label>
+              <label for="hardware">Primary hardware <span class="req" aria-hidden="true">*</span></label>
               <select id="hardware" name="hardware" required>
                 <option value="">Select one</option>
                 <option>Servers</option>
@@ -1158,7 +1161,7 @@
               </select>
             </div>
             <div class="field full">
-              <label for="details">Count and details</label>
+              <label for="details">Count and details <span class="req" aria-hidden="true">*</span></label>
               <textarea id="details" name="details" placeholder="Approximate quantity, condition, and access notes" maxlength="2000" required></textarea>
             </div>
             <div class="field full">
