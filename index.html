@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="build-version" content="v20261001-oldiron-0855">
+  <meta name="build-version" content="v20261001-oldiron-0930">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="robots" content="max-image-preview:large">
   <meta name="color-scheme" content="light dark">
@@ -42,12 +42,15 @@
       // Theme: notebook is the default, a stored visitor choice wins. Runs
       // before the stylesheet is parsed so the first paint is already the
       // right theme, with no flash of the wrong one.
+      let t = 'notebook';
       try {
-        const t = localStorage.getItem('emi-site-theme');
-        document.documentElement.dataset.theme = t === 'classic' ? 'classic' : 'notebook';
-      } catch (_) {
-        document.documentElement.dataset.theme = 'notebook';
-      }
+        t = localStorage.getItem('emi-site-theme') === 'classic' ? 'classic' : 'notebook';
+      } catch (_) {}
+      document.documentElement.dataset.theme = t;
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', t === 'classic' ? '#11120f' : '#ece6d5');
+      const scheme = document.querySelector('meta[name="color-scheme"]');
+      if (scheme) scheme.setAttribute('content', t === 'classic' ? 'dark' : 'light');
     })();
   </script>
   <script type="application/ld+json">
